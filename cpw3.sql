@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `cpw3` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `cpw3`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: cpw3
 -- ------------------------------------------------------
@@ -78,8 +76,9 @@ CREATE TABLE `cliente` (
   `cpf` varchar(11) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `endereco_id` int(11) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +87,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Antonio Carlos Miranda','2222','acm@gmail.com',1),(3,'Antonio Carlos Miranda','999','acm@gmail.com',1),(4,'Antonio Carlos Miranda','999','acm@gmail.com',1),(5,'Antonio Carlos Miranda','999','acm@gmail.com',1),(6,'Antonio Carlos Miranda','999','acm@gmail.com',1),(8,'João Paulo','9999','joaopaulo@hotmail.com',1),(10,'Francisco Xavier da Silva',NULL,'francisco.silva@ifms.edu.br',1);
+INSERT INTO `cliente` VALUES (1,'Bart Simpson','2222','acm@gmail.com',1,'./img/clientes/Bart-simpson.jpg'),(3,'Homer Simpson','999','acm@gmail.com',1,'./img/clientes/hommer.png'),(4,'Antonio Carlos Miranda','999','acm@gmail.com',1,NULL),(5,'Antonio Carlos Miranda','999','acm@gmail.com',1,NULL),(6,'Antonio Carlos Miranda','999','acm@gmail.com',1,NULL),(8,'João Paulo','9999','joaopaulo@hotmail.com',1,NULL),(10,'Francisco Xavier da Silva',NULL,'francisco.silva@ifms.edu.br',1,NULL),(11,'Walter White','99999','www@xyz.com',1,'./img/clientes/ww.png');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,6 +117,36 @@ LOCK TABLES `endereco` WRITE;
 /*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
 INSERT INTO `endereco` VALUES (1,'Primeira Rua','Primeiro Bairro','Coxim','MS','79400000');
 /*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orcamento`
+--
+
+DROP TABLE IF EXISTS `orcamento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orcamento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `dataini` varchar(45) DEFAULT NULL,
+  `datafim` varchar(45) DEFAULT NULL,
+  `total` decimal(15,2) DEFAULT NULL,
+  `produtos` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orcamento`
+--
+
+LOCK TABLES `orcamento` WRITE;
+/*!40000 ALTER TABLE `orcamento` DISABLE KEYS */;
+INSERT INTO `orcamento` VALUES (1,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-18','2017-11-19',30.00,'Array'),(2,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-18','2017-11-19',30.00,'3,3,brinquedo3,10.00;'),(3,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-18','2017-11-19',30.00,'3,3,brinquedo3,10.00;3,3,brinquedo3,10.00'),(4,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-18','2017-11-19',30.00,'3,brinquedo3,10.00;3,brinquedo3,10.00'),(5,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-18','2017-11-19',30.00,'3,brinquedo3,10.00;3,brinquedo3,10.00'),(6,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-18','2017-11-19',30.00,'1,brinquedo1,10.00;2,brinquedo2,10.00;3,brinquedo3,10.00'),(7,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-18','2017-11-19',30.00,'1,brinquedo1,10.00;2,brinquedo2,10.00;3,brinquedo3,10.00'),(8,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-18','2017-11-19',30.00,'1,brinquedo1,10.00;2,brinquedo2,10.00;3,brinquedo3,10.00'),(9,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-18','2017-11-19',30.00,'1,brinquedo1,10.00;2,brinquedo2,10.00;3,brinquedo3,10.00'),(10,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-13','2017-11-13',30.00,'1,brinquedo1,10.00;2,brinquedo2,10.00;3,brinquedo3,10.00'),(11,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-17','2017-11-18',30.00,'1,brinquedo1,10.00;2,brinquedo2,10.00;3,brinquedo3,10.00'),(12,'gilsonsatu@gmail.com',NULL,'6732913124','2017-11-22','2017-11-30',30.00,'1,brinquedo1,10.00;2,brinquedo2,10.00;3,brinquedo3,10.00');
+/*!40000 ALTER TABLE `orcamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -160,7 +189,7 @@ CREATE TABLE `produto` (
   `preco` decimal(15,2) DEFAULT NULL,
   `nome` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,6 +198,7 @@ CREATE TABLE `produto` (
 
 LOCK TABLES `produto` WRITE;
 /*!40000 ALTER TABLE `produto` DISABLE KEYS */;
+INSERT INTO `produto` VALUES (1,NULL,10.00,'brinquedo1'),(2,NULL,10.00,'brinquedo2'),(3,NULL,10.00,'brinquedo3');
 /*!40000 ALTER TABLE `produto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +214,7 @@ CREATE TABLE `usuario` (
   `email` varchar(255) DEFAULT NULL,
   `senha` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +223,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (3,'vinicius_pg@hotmail.com','123'),(4,'gilsonsatu@gmail.com','123');
+INSERT INTO `usuario` VALUES (3,'vinicius_pg@hotmail.com','123'),(4,'gilsonsatu@gmail.com','123'),(5,'adm@adm.com','123');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -206,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-31 19:48:55
+-- Dump completed on 2017-11-28 16:51:26
