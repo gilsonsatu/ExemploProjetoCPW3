@@ -17,6 +17,7 @@ class Cliente {
     private $endereco;
     private $email;
     private $cpf;
+    private $foto;
         
     function __construct($id, $nome, Endereco $endereco, $email) {
         $this->id = $id;
@@ -65,7 +66,15 @@ class Cliente {
         $this->cpf = $cpf;
     }
     
-    
+    function getFoto() {
+        return $this->foto;
+    }
+
+    function setFoto($foto) {
+        $this->foto = $foto;
+    }
+
+
 
 
 

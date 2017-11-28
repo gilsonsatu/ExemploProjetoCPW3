@@ -10,25 +10,27 @@ class DaoCliente {
     }
 
     public function insere(Cliente $cliente){
-        $sql = "insert into cliente(nome, email, cpf, endereco_id) values (?,?,?,?)";   //sql
+        $sql = "insert into cliente(nome, email, cpf, endereco_id, foto) values (?,?,?,?,?)";   //sql
         $sqlprep = $this->conexao->prepare($sql);                                       //prepara sql
-        $sqlprep->bind_param("sssi",
+        $sqlprep->bind_param("sssis",
                                 $cliente->getNome(), 
                                 $cliente->getEmail(), 
                                 $cliente->getCpf(),
-                                $cliente->getEndereco()->getId()
+                                $cliente->getEndereco()->getId(),
+                                $cliente->getFoto()
                             );                                                          //atribui valores parametros sql
         $sqlprep->execute();                                                            //executa sql
     }
     
     public function altera(Cliente $cliente) {
-        $sql = "update cliente set nome=?,email=?,cpf=?,endereco_id=? where id=?";       //string sql 
+        $sql = "update cliente set nome=?,email=?,cpf=?,endereco_id=?,foto=? where id=?";       //string sql 
         $sqlprep = $this->conexao->prepare($sql);                                       //preparação do sql
-        $sqlprep->bind_param("sssii",
+        $sqlprep->bind_param("sssisi",
                                 $cliente->getNome(), 
                                 $cliente->getEmail(), 
                                 $cliente->getCpf(),
                                 $cliente->getEndereco()->getId(),
+                                $cliente->getFoto(),
                                 $cliente->getId()
                             );                                                          //atribui valores parametros sql
         $sqlprep->execute();                                                            //executa a instrução SQL
@@ -61,6 +63,7 @@ class DaoCliente {
                                         $registro["email"]);
             
             $cliente->setCpf($registro["cpf"]);
+            $cliente->setFoto(registro["foto"]);
             array_push($vetorLista, $cliente);                                          // adiciona objeto no vetor
             $registro = mysqli_fetch_assoc($registros);                                 //pegar o próximo registro
         }
@@ -90,6 +93,7 @@ class DaoCliente {
                                         $registro["email"]);
             
             $cliente->setCpf($registro["cpf"]);
+            $cliente->setFoto($registro["foto"]);
             array_push($vetorLista, $cliente);                                          // adiciona objeto no vetor
             $registro = mysqli_fetch_assoc($registros);                                 //pegar o próximo registro
         }
@@ -119,7 +123,8 @@ class DaoCliente {
                                     $registro["nome"], 
                                     $endereco, 
                                     $registro["email"]);
-        $cliente->setCpf($registro["cpf"]);        
+        $cliente->setCpf($registro["cpf"]);     
+        $cliente->setFoto($registro["foto"]);
         return $cliente;                                                                //retorna objeto
     }
 

@@ -8,11 +8,17 @@ require_once 'cabecalho.php';
         <a href="CtlCliente.php?op=formInsere" class="btn btn-primary">Novo</a>
     </div>
 </div>
+
 <table class="table table-striped table-bordered">
     <?php
     foreach ($clientes as $cliente) :
         ?>
         <tr>
+            <td>
+            <?php if($cliente->getFoto()!=''): ?>
+                <img src="<?=$cliente->getFoto(); ?>">
+            <?php endif ?>
+            </td>
             <td class="col-md-4"><?= $cliente->getNome() ?></td>
             <td class="col-md-2"><?= $cliente->getCpf() ?></td>
             <td class="col-md-2"><?= $cliente->getEmail() ?></td>

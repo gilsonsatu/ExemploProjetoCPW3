@@ -7,6 +7,7 @@ if (isset($_GET) && (isset($_GET["id"]))) {
     $cliente = $daoUsuario->getPorId($id);
 } else {
     $cliente = new Cliente(0, "", new Endereco(1, "", "", "", "", ""), "");
+    $cliente->setFoto("");
 }
 ?>	
 
@@ -14,7 +15,7 @@ if (isset($_GET) && (isset($_GET["id"]))) {
 <?php require_once("./cabecalho.php"); ?>
 
 <h1>Cliente</h1>
-<form action="CtlCliente.php?op=salvar" method="post">
+<form action="CtlCliente.php?op=salvar" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <input type="hidden" name="id" value="<?= $cliente->getId() ?>">
         <label>Nome</label>
@@ -27,6 +28,15 @@ if (isset($_GET) && (isset($_GET["id"]))) {
     <div class="form-group">
         <label>E-mail</label>
         <input class="form-control" type="email" name="email" value="<?= $cliente->getEmail() ?>">
+    </div>
+    <div class="form-group">
+        <label>Foto</label>
+        <?php if($cliente->getFoto()!=''): ?>
+        <img src="<?=$cliente->getFoto() ?>">
+        <input type="hidden" name="foto_img" value="<?=$cliente->getFoto() ?>">
+        <?php else : ?>
+        <input class="form-control" type="file" name="foto" class="form-control">
+        <?php endif ?>
     </div>
     <div class="form-group">
         <button class="btn btn-primary" type="submit">Salvar</button>

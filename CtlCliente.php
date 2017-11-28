@@ -37,12 +37,27 @@ class CtlCliente {
         $endereco = new Endereco(1, "x", "x", "x", "x", "x");
         $cliente = new Cliente($params["id"], $params["nome"], $endereco, $params["email"]);
         $cliente->setCpf($params["cpf"]);
+        if(!isset($params["foto_img"])) {
+            $cliente->setFoto($this->upload($_FILES));
+        } else {
+            $cliente->setFoto($params["foto_img"]);
+        }
         if ($cliente->getId() == 0) {
             $this->daoCliente->insere($cliente);
         } else {
             $this->daoCliente->altera($cliente);
         }
-        header("Location: listaCliente.php");
+        $this->listaComPaginacao();
+    }
+    
+    private function upload($params) {
+        $nome_arquivo = $params["foto"]["name"];
+        $nome_arquivo_tmp = $params["foto"]["tmp_name"];
+        if(move_uploaded_file($nome_arquivo_tmp, "./img/clientes/".$nome_arquivo)){
+            return "./img/clientes/".$nome_arquivo;
+        }else{
+            return "";
+        }
     }
 
     function remove($id) {
@@ -66,7 +81,7 @@ class CtlCliente {
         require_once './ListaCliente.php';
     }
 
-    function listaComPaginacao($params) {
+    function listaComPaginacao($params='') {
         $ctlUsuario = new CtlUsuario($this->conexao);
         $ctlUsuario->protegeAcesso();
         $daoCliente = new DaoCliente($this->conexao);
